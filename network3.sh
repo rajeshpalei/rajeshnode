@@ -21,6 +21,8 @@ tar -xvf ubuntu-node-v2.1.0.tar
 
 # Remove the tar file after extraction
 rm -rf ubuntu-node-v2.1.0.tar
+#add the rule for 8080 port
+sudo ufw allow 8080
 
 # Thank you message
 echo "==================================="
