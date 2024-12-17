@@ -17,10 +17,10 @@ sudo apt install -y net-tools
 wget https://network3.io/ubuntu-node-v2.1.1.tar.gz
 
 # Extract the contents of the tar file
-tar -xvf ubuntu-node-v2.1.0.tar
+tar -xvf ubuntu-node-v2.1.1.tar.gz
 
 # Remove the tar file after extraction
-rm -rf ubuntu-node-v2.1.0.tar
+rm -rf ubuntu-node-v2.1.1.tar
 #add the rule for 8080 port
 sudo ufw allow 8080
 
