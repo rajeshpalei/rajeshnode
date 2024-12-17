@@ -14,7 +14,7 @@ sudo apt update
 sudo apt install -y net-tools
 
 # Download the specified tar file
-wget https://network3.io/ubuntu-node-v2.1.0.tar
+wget https://network3.io/ubuntu-node-v2.1.1.tar.gz
 
 # Extract the contents of the tar file
 tar -xvf ubuntu-node-v2.1.0.tar
