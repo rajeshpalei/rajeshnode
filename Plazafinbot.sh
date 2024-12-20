@@ -35,8 +35,29 @@ echo "============================================="
 # Update and upgrade the system
 apt update -y && apt upgrade -y
 
-# Install required dependencies
-apt install -y curl git
+# Check if curl is installed, if not, install it
+if ! command -v curl &> /dev/null; then
+    echo -e "${INFO}curl is not installed. Installing...${NC}"
+    apt install -y curl
+else
+    echo -e "${INFO}curl is already installed.${NC}"
+fi
+
+# Check if git is installed, if not, install it
+if ! command -v git &> /dev/null; then
+    echo -e "${INFO}git is not installed. Installing...${NC}"
+    apt install -y git
+else
+    echo -e "${INFO}git is already installed.${NC}"
+fi
+
+# Check if screen is installed, if not, install it
+if ! command -v screen &> /dev/null; then
+    echo -e "${INFO}screen is not installed. Installing...${NC}"
+    apt install -y screen
+else
+    echo -e "${INFO}screen is already installed.${NC}"
+fi
 
 # Install NVM (Node Version Manager)
 echo -e "${INFO}Installing NVM (Node Version Manager)...${NC}"
