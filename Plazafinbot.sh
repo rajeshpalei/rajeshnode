@@ -33,7 +33,7 @@ echo -e "${YELLOW}Medium: ${CYAN}https://medium.com/@cryptonodehindi${NC}"
 echo "============================================="
 
 # Update and upgrade the system
-apt update -y && apt upgrade -y
+apt update -y
 
 # Check if curl is installed, if not, install it
 if ! command -v curl &> /dev/null; then
@@ -58,6 +58,9 @@ if ! command -v screen &> /dev/null; then
 else
     echo -e "${INFO}screen is already installed.${NC}"
 fi
+
+#Install the NPM
+apt install npm -y
 
 # Install NVM (Node Version Manager)
 echo -e "${INFO}Installing NVM (Node Version Manager)...${NC}"
