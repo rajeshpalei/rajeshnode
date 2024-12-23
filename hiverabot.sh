@@ -33,7 +33,7 @@ echo -e "${YELLOW}Medium: ${CYAN}https://medium.com/@cryptonodehindi${NC}"
 echo "============================================="
 
 # Update and upgrade the system
-apt update -y && apt upgrade -y
+apt update -y
 
 # Check if curl is installed, if not, install it
 if ! command -v curl &> /dev/null; then
