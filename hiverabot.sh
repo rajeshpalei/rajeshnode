@@ -90,7 +90,7 @@ git clone https://github.com/CryptonodesHindi/CNH-Hiverabot || {
 }
 
 # Navigate to the project directory and install dependencies only if successful
-cd CNH-PlazafinanceBot || { 
+cd CNH-Hiverabot || { 
     echo -e "${RED}Failed to navigate to CNH-Hiverabot directory!${NC}" 
     exit 1
 }
