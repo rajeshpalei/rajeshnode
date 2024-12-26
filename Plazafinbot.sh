@@ -10,7 +10,7 @@ BLUE='\033[0;34m'   # Blue
 CYAN='\033[0;36m'   # Cyan
 NC='\033[0m'        # No Color
 
-# Display social details and channel information in large letters manually
+# Display social details and channel information
 echo "========================================"
 echo -e "${YELLOW} Script is made by CRYPTONODEHINDI${NC}"
 echo -e "-------------------------------------"
@@ -24,7 +24,7 @@ echo -e "${BANNER}  CCCCC  R    R    Y    P        T    OOO      N   N   OOO   D
 
 echo "============================================"
 
-# Use different colors for each link to make them pop out more
+# Use different colors for each link
 echo -e "${YELLOW}Telegram: ${GREEN}https://t.me/cryptonodehindi${NC}"
 echo -e "${YELLOW}Twitter: ${GREEN}@CryptonodeHindi${NC}"
 echo -e "${YELLOW}YouTube: ${GREEN}https://www.youtube.com/@CryptonodesHindi${NC}"
@@ -35,29 +35,15 @@ echo "============================================="
 # Update and upgrade the system
 apt update -y && apt upgrade -y
 
-# Check if curl is installed, if not, install it
-if ! command -v curl &> /dev/null; then
-    echo -e "${INFO}curl is not installed. Installing...${NC}"
-    apt install -y curl
-else
-    echo -e "${INFO}curl is already installed.${NC}"
-fi
-
-# Check if git is installed, if not, install it
-if ! command -v git &> /dev/null; then
-    echo -e "${INFO}git is not installed. Installing...${NC}"
-    apt install -y git
-else
-    echo -e "${INFO}git is already installed.${NC}"
-fi
-
-# Check if screen is installed, if not, install it
-if ! command -v screen &> /dev/null; then
-    echo -e "${INFO}screen is not installed. Installing...${NC}"
-    apt install -y screen
-else
-    echo -e "${INFO}screen is already installed.${NC}"
-fi
+# Check and install required tools
+for tool in curl git screen; do
+    if ! command -v $tool &> /dev/null; then
+        echo -e "${INFO}$tool is not installed. Installing...${NC}"
+        apt install -y $tool
+    else
+        echo -e "${INFO}$tool is already installed.${NC}"
+    fi
+done
 
 # Install NPM
 apt install npm -y
@@ -68,7 +54,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 # Source the shell configuration file to load NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Install Node.js using NVM
 nvm install node
@@ -78,6 +64,17 @@ nvm use 20
 # Verify Node.js version
 echo -e "${INFO}Node.js version: $(node -v)${NC}"
 
+# Check if the directory is present
+if [ -d "CNH-PlazafinanceBot" ]; then
+    echo -e "${INFO}Directory CNH-PlazafinanceBot found. Processing...${NC}"
+    # Copy the file
+    cp CNH-PlazafinanceBot/wallets.json /root/
+    # Remove the directory
+    rm -rf CNH-PlazafinanceBot
+else
+    echo -e "${YELLOW}Directory CNH-PlazafinanceBot not found. Skipping...${NC}"
+fi
+
 # Clone the repository
 echo -e "${INFO}Cloning the CryptonodeHindi repository...${NC}"
 git clone https://github.com/CryptonodesHindi/CNH-PlazafinanceBot.git || {
@@ -85,7 +82,7 @@ git clone https://github.com/CryptonodesHindi/CNH-PlazafinanceBot.git || {
     exit 1
 }
 
-# Navigate to the project directory and install dependencies only if successful
+# Navigate to the project directory
 cd CNH-PlazafinanceBot || { 
     echo -e "${RED}Failed to navigate to CNH-PlazafinanceBot directory!${NC}" 
     exit 1
@@ -93,10 +90,13 @@ cd CNH-PlazafinanceBot || {
 
 # Install project dependencies
 echo -e "${INFO}Installing project dependencies...${NC}"
-
-# Install ethers only if the directory navigation is successful
 npm install ethers || { 
     echo -e "${RED}Failed to install ethers dependencies.${NC}"
+    exit 1
+}
+
+npm install axios || { 
+    echo -e "${RED}Failed to install axios dependencies.${NC}"
     exit 1
 }
 
