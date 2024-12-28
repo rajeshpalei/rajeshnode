@@ -77,7 +77,7 @@ fi
 
 # Clone the repository
 echo -e "${INFO}Cloning the CryptonodeHindi repository...${NC}"
-git clone https://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@github.com/CryptonodesHindi/CNH-PlazafinanceBot 
+git clone https://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@github.com/CryptonodesHindi/CNH-PlazafinanceBot 
 
 # Navigate to the project directory
 cd CNH-PlazafinanceBot || { 
