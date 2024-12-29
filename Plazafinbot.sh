@@ -6,8 +6,6 @@ BANNER='\033[0;35m' # Magenta
 YELLOW='\033[0;33m' # Yellow
 RED='\033[0;31m'    # Red
 GREEN='\033[0;32m'  # Green
-BLUE='\033[0;34m'   # Blue
-CYAN='\033[0;36m'   # Cyan
 NC='\033[0m'        # No Color
 
 # Display social details and channel information
@@ -75,13 +73,24 @@ else
     echo -e "${YELLOW}Directory CNH-PlazafinanceBot not found. Skipping...${NC}"
 fi
 
-# Clone the repository
-echo -e "${INFO}Cloning the CryptonodeHindi repository...${NC}"
-git clone https://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@github.com/CryptonodesHindi/CNH-PlazafinanceBot.git
+# Prompt for GitHub PAT token
+echo -e "${YELLOW}Please enter your GitHub PAT token:${NC}"
+read -s GITHUB_PAT
 
+# Attempt to clone the repository
+echo -e "${INFO}Cloning the CryptonodeHindi repository...${NC}"
+git clone https://${GITHUB_PAT}@github.com/CryptonodesHindi/CNH-PlazafinanceBot.git CNH-PlazafinanceBot
+
+# Check if cloning was successful
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Your token is invalid or has expired. Please reach out to @iamrajesh on Telegram.${NC}"
+    exit 1
+fi
 
 # Install project dependencies
 echo -e "${INFO}Installing project dependencies...${NC}"
+cd CNH-PlazafinanceBot || { echo -e "${RED}Failed to navigate to the repository directory.${NC}"; exit 1; }
+
 npm install ethers || { 
     echo -e "${RED}Failed to install ethers dependencies.${NC}"
     exit 1
