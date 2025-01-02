@@ -6,6 +6,7 @@ BANNER='\033[0;35m' # Magenta
 YELLOW='\033[0;33m' # Yellow
 RED='\033[0;31m'    # Red
 GREEN='\033[0;32m'  # Green
+CYAN='\033[0;36m'   # Cyan
 NC='\033[0m'        # No Color
 
 # Display social details and channel information
@@ -73,9 +74,22 @@ else
     echo -e "${YELLOW}Directory CNH-PlazafinanceBot not found. Skipping...${NC}"
 fi
 
-# Prompt for GitHub PAT token
-echo -e "${YELLOW}Please enter your GitHub PAT token:${NC}"
-read -s GITHUB_PAT
+# Prompt for GitHub PAT token and confirmation
+while true; do
+    echo -e "${YELLOW}Please enter your GitHub PAT token:${NC}"
+    read -s GITHUB_PAT
+
+    # Display the full token for confirmation
+    echo -e "${INFO}You entered: ${GITHUB_PAT}"
+    echo -e "${YELLOW}Is this correct? (yes/no):${NC}"
+    read confirmation
+
+    if [[ $confirmation == "yes" ]]; then
+        break
+    else
+        echo -e "${YELLOW}Let's try again.${NC}"
+    fi
+done
 
 # Attempt to clone the repository
 echo -e "${INFO}Cloning the CryptonodeHindi repository...${NC}"
