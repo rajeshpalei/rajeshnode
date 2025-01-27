@@ -32,7 +32,7 @@ echo -e "${YELLOW}Medium: ${CYAN}https://medium.com/@cryptonodehindi${NC}"
 echo "============================================="
 
 # Update and upgrade the system
-apt update -y && apt upgrade -y
+apt update -y
 
 # Check and install required tools
 for tool in curl git screen; do
